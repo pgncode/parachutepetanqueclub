@@ -1,0 +1,104 @@
+# Configuration Pages CMS — Parachute Pétanque Club
+# Seuls les fichiers du dossier data/ et les PDF du dossier documents/ sont modifiables.
+
+media:
+  - name: documents
+    label: Documents PDF
+    input: documents
+    output: documents
+    extensions: [pdf]
+
+content:
+  - name: manifestations
+    label: Manifestations
+    type: file
+    path: data/manifestations.json
+    format: json
+    list: true
+    fields:
+      - name: titre
+        label: Titre de la manifestation
+        type: string
+        required: true
+      - name: debut
+        label: Date (ou premier jour)
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: fin
+        label: Dernier jour (seulement si plusieurs jours)
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: ligne1
+        label: Ligne en gras (type de concours, dates)
+        type: string
+      - name: ligne2
+        label: Ligne de détail
+        type: string
+      - name: couleur
+        label: Couleur de la carte
+        type: select
+        default: bleu
+        options:
+          values:
+            - name: bleu
+              label: Bleu (par défaut)
+            - name: rose
+              label: Rose (Octobre Rose…)
+
+  - name: adhesion
+    label: Adhésion et tarifs
+    type: file
+    path: data/adhesion.json
+    format: json
+    fields:
+      - name: saison
+        label: Saison (ex. 2026-2027)
+        type: string
+        required: true
+      - name: tarifs
+        label: Tarifs
+        type: object
+        list: true
+        fields:
+          - name: categorie
+            label: Catégorie (ex. SENIORS)
+            type: string
+            required: true
+          - name: prix
+            label: Prix en euros par an
+            type: number
+            required: true
+      - name: formulaire
+        label: Formulaire d'adhésion (PDF)
+        type: file
+        options:
+          media: documents
+
+  - name: horaires
+    label: Horaires des entraînements
+    type: file
+    path: data/horaires.json
+    format: json
+    fields:
+      - name: creneaux
+        label: Créneaux
+        type: object
+        list: true
+        fields:
+          - name: jour
+            label: Jour
+            type: select
+            required: true
+            options:
+              values: [Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche]
+          - name: heures
+            label: Heures (ex. 18h00 – 20h00)
+            type: string
+            required: true
+      - name: note
+        label: Phrase sous les horaires
+        type: string

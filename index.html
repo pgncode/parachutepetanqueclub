@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Parachute Pétanque Club</title>
+<meta name="description" content="Parachute Pétanque Club (PPC), club de pétanque à Petit-Bourg, Guadeloupe. Adhésion 2026/2027, manifestations, horaires des entraînements et contact.">
+<meta name="theme-color" content="#1D5594">
+<meta property="og:title" content="Parachute Pétanque Club · Petit-Bourg">
+<meta property="og:description" content="Convivialité • Sport • Partage. Adhésion 2026/2027, manifestations et contact du PPC.">
+<meta property="og:image" content="https://pgncode.github.io/parachutepetanqueclub/og-ppc.jpg">
+<link rel="canonical" href="https://pgncode.github.io/parachutepetanqueclub/">
+<meta property="og:url" content="https://pgncode.github.io/parachutepetanqueclub/">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap">
+<style>
+/* Layout : une colonne pensée pour le pouce. Bandeau « voilure » en tête,
+   rubriques empilées, barre d'onglets en bas sur téléphone, en haut sur ordinateur. */
+:root {
+  --bg: #F4F7FB;
+  --surface: #FFFFFF;
+  --ink: #12233A;
+  --muted: #4E5F78;
+  --line: #DAE3EE;
+  --blue: #1D5594;
+  --blue-soft: #E4EEF8;
+  --link: #1D5594;
+  --yellow: #F2D23C;
+  --on-blue: #FFFFFF;
+  --rose: #C2326A;
+  --rose-soft: #FBE7EF;
+  --cochonnet: #E4532C;
+  --hero: #1D5594;
+  --hero-2: #2A6DB2;
+  --disc: #FFFFFF;
+  --shadow: 0 1px 2px rgba(18,35,58,.06), 0 8px 24px rgba(18,35,58,.08);
+
+  --f-display: "Baloo 2", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  --f-body: "Montserrat", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --tabbar-h: 64px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1625; --surface: #14223A; --ink: #E8F0F9; --muted: #A6B5CA; --line: #25385A;
+    --blue-soft: #1A2D4B; --link: #8DC0F2; --rose: #F27CA8; --rose-soft: #3A1B2B;
+    --hero: #163F70; --hero-2: #1D5594;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C1625; --surface: #14223A; --ink: #E8F0F9; --muted: #A6B5CA; --line: #25385A;
+  --blue-soft: #1A2D4B; --link: #8DC0F2; --rose: #F27CA8; --rose-soft: #3A1B2B;
+  --hero: #163F70; --hero-2: #1D5594;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--hero); }
+a { color: var(--link); }
+:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; border-radius: 8px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.wrap { max-width: 960px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.icon { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Barre d'onglets ---------- */
+.tabbar {
+  position: fixed; z-index: 20; left: 0; right: 0; bottom: 0;
+  background: var(--surface); border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px));
+  box-shadow: 0 -6px 20px rgba(18,35,58,.08);
+}
+.tabbar-inner { display: flex; align-items: stretch; max-width: 960px; margin: 0 auto; height: var(--tabbar-h); }
+.tabbar .brand { display: none; }
+.tabbar ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; }
+.tabbar a {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; height: 100%;
+  text-decoration: none; color: var(--muted);
+  font-family: var(--f-display); font-weight: 600; font-size: 12px; letter-spacing: .01em; white-space: nowrap;
+  border-radius: 12px; transition: color .2s;
+}
+.tabbar a .icon { width: 22px; height: 22px; }
+.tabbar a .pip { width: 32px; height: 26px; display: grid; place-items: center; border-radius: 13px; transition: background .2s; }
+.tabbar a[aria-current="true"] { color: var(--ink); }
+.tabbar a[aria-current="true"] .pip { background: var(--yellow); color: #12233A; }
+
+@media (min-width: 820px) {
+  body { padding-bottom: 0; }
+  .tabbar {
+    position: sticky; top: env(safe-area-inset-top, 0px); bottom: auto;
+    border-top: 0; border-bottom: 1px solid var(--line); box-shadow: none;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(10px);
+  }
+  .tabbar-inner { height: 60px; align-items: center; justify-content: space-between; }
+  .tabbar .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: var(--f-display); font-weight: 800; font-size: 20px; }
+  .tabbar .brand img { width: 40px; height: 40px; border-radius: 50%; background: var(--disc); padding: 2px; border: 2px solid var(--yellow); }
+  .tabbar ul { display: flex; width: auto; gap: 4px; }
+  .tabbar a { flex-direction: row; gap: 8px; padding: 8px 14px; font-size: 15px; height: auto; border-radius: 999px; }
+  .tabbar a .pip { width: auto; height: auto; background: none !important; }
+  .tabbar a .icon { width: 18px; height: 18px; }
+  .tabbar a:hover { color: var(--ink); background: var(--blue-soft); }
+  .tabbar a[aria-current="true"] { background: var(--yellow); color: #12233A; }
+}
+
+/* ---------- Bandeau voilure ---------- */
+.hero {
+  position: relative; overflow: hidden; color: var(--on-blue); text-align: center;
+  background:
+    repeating-conic-gradient(from 0deg at 50% -10%, rgba(242,210,60,.16) 0deg 9deg, rgba(255,255,255,0) 9deg 18deg),
+    radial-gradient(120% 90% at 50% 0%, var(--hero-2), var(--hero));
+  border-radius: 0 0 50% 50% / 0 0 36px 36px;
+  padding-block: 28px 64px;
+}
+.hero .wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.disc {
+  width: 148px; height: 148px; border-radius: 50%; background: var(--disc);
+  border: 4px solid var(--yellow); box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  display: grid; place-items: center; padding: 8px;
+}
+.disc img { width: 100%; height: 100%; object-fit: contain; }
+.hero h1 { font-size: clamp(1.85rem, 7.4vw, 3.2rem); font-weight: 800; letter-spacing: .005em; margin-top: 4px; }
+.hero .place { font-weight: 700; font-size: clamp(.82rem, 3.4vw, 1rem); letter-spacing: .16em; opacity: .9; }
+.hero .values { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.1rem, 4.6vw, 1.4rem); color: var(--yellow); }
+.hero .values span { color: var(--on-blue); opacity: .7; padding: 0 .35em; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 12px 24px; border-radius: 999px; border: 0; cursor: pointer;
+  font-family: var(--f-display); font-weight: 700; font-size: 1.12rem; line-height: 1.15; text-decoration: none; text-align: center;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn-yellow { background: var(--yellow); color: #12233A; box-shadow: 0 6px 0 rgba(0,0,0,.18); margin-top: 8px; }
+.btn-yellow:hover { box-shadow: 0 8px 0 rgba(0,0,0,.18); transform: translateY(-1px); }
+.btn-blue { background: #1D5594; color: var(--yellow); box-shadow: 0 6px 16px rgba(29,85,148,.28); }
+.btn-blue:hover { transform: translateY(-1px); }
+
+/* Prochain rendez-vous */
+.next {
+  position: relative; z-index: 2; margin-top: -36px;
+}
+.next a {
+  display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--ink);
+  background: var(--surface); border-radius: 18px; padding: 14px 16px; box-shadow: var(--shadow); border: 1px solid var(--line);
+  max-width: 560px; margin: 0 auto;
+}
+.next .label { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.next .title { font-family: var(--f-display); font-weight: 700; font-size: 1.08rem; line-height: 1.2; }
+.next .when { font-size: .88rem; color: var(--muted); font-weight: 600; }
+.next .go { margin-left: auto; color: var(--muted); }
+.next-text { min-width: 0; display: grid; gap: 2px; }
+
+/* ---------- Rubriques ---------- */
+main { display: grid; gap: 0; padding-block: 16px 32px; }
+section { scroll-margin-top: 24px; padding-block: 24px; }
+section + section { border-top: 1px solid var(--line); }
+@media (min-width: 820px) { section { scroll-margin-top: 84px; padding-block: 40px; } }
+.sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.badge { width: 48px; height: 48px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--yellow); color: #12233A; }
+.badge .icon { width: 24px; height: 24px; }
+.eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.sec-head h2 { font-size: clamp(1.5rem, 5.6vw, 2.1rem); font-weight: 800; }
+.lede { display: grid; gap: 4px; margin-bottom: 22px; }
+.lede strong { font-size: 1.08rem; }
+.lede em { color: var(--muted); font-weight: 500; }
+
+/* Adhésion */
+.prices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 22px; }
+.price {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px 8px 16px;
+  display: grid; justify-items: center; gap: 8px; text-align: center;
+}
+.price .ball {
+  width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 34% 30%, #FFFFFF 0 8%, #C9D3DE 26%, #8A97A6 70%, #6B7787 100%);
+  box-shadow: inset -4px -6px 10px rgba(0,0,0,.18);
+}
+.price .ball span { font-family: var(--f-display); font-weight: 800; color: #12233A; font-size: 1.05rem; }
+.price .cat { font-family: var(--f-display); font-weight: 800; font-size: clamp(.92rem, 3.8vw, 1.2rem); letter-spacing: .04em; }
+.price .amount { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.7rem, 7vw, 2.3rem); line-height: 1; color: var(--link); font-variant-numeric: tabular-nums; }
+.price .per { font-size: .8rem; font-weight: 600; color: var(--muted); margin-top: -4px; }
+.download { display: grid; justify-items: center; gap: 10px; text-align: center; }
+.download .btn { width: 100%; max-width: 440px; min-height: 60px; font-size: 1.18rem; }
+.download .meta { font-size: .85rem; color: var(--muted); font-weight: 600; }
+.download .season { font-style: italic; font-weight: 500; color: var(--muted); }
+.dl-msg { font-size: .9rem; color: var(--muted); }
+
+/* Manifestations */
+.events { display: grid; gap: 14px; }
+.event {
+  --tone: var(--link); --tone-soft: var(--blue-soft);
+  display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 16px; align-items: start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 16px;
+}
+.event.rose { --tone: var(--rose); --tone-soft: var(--rose-soft); }
+.date {
+  background: var(--tone-soft); color: var(--tone); border-radius: 14px; text-align: center; padding: 10px 4px;
+  display: grid; gap: 0; font-family: var(--f-display); line-height: 1;
+}
+.date .d { font-weight: 800; font-size: 1.9rem; font-variant-numeric: tabular-nums; }
+.date .m { font-weight: 800; font-size: .95rem; letter-spacing: .08em; margin-top: 4px; }
+.date .y { font-weight: 600; font-size: .85rem; opacity: .8; margin-top: 2px; }
+.date .d { white-space: nowrap; }
+.date .d.long { font-size: 1.45rem; }
+.date .to { font-weight: 700; font-size: .78rem; margin-top: 6px; white-space: nowrap; }
+.event-body { display: grid; gap: 4px; min-width: 0; }
+.event h3 { font-size: 1.28rem; font-weight: 800; color: var(--ink); }
+.event .sub { font-weight: 700; }
+.event .detail { color: var(--muted); font-weight: 500; }
+.chip { justify-self: start; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--tone-soft); color: var(--tone); margin-bottom: 4px; }
+.event.is-past { opacity: .62; }
+.note { margin-top: 18px; padding: 16px 18px; border-radius: 16px; border: 2px dashed var(--line); display: grid; gap: 2px; }
+.note h3 { font-size: 1.05rem; font-weight: 800; letter-spacing: .02em; }
+.note p { color: var(--muted); font-weight: 500; }
+
+/* Suivez-nous */
+.socials { display: grid; gap: 12px; }
+@media (min-width: 620px) { .socials { grid-template-columns: 1fr 1fr; } }
+.social {
+  display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; text-decoration: none;
+  background: #1D5594; color: #FFFFFF; min-height: 72px;
+}
+.social .net { font-family: var(--f-display); font-weight: 800; font-size: 1.3rem; color: var(--yellow); line-height: 1.1; }
+.social .handle { font-size: .86rem; opacity: .85; overflow-wrap: anywhere; }
+.social .txt { display: grid; min-width: 0; }
+.social .go { margin-left: auto; }
+.social:hover { background: #22609F; }
+
+/* Contact */
+.actions { display: grid; gap: 12px; }
+@media (min-width: 820px) { .actions { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.action {
+  display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 4px 14px; align-items: center;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px;
+}
+.action .ico { grid-row: span 2; width: 48px; height: 48px; border-radius: 14px; background: var(--blue-soft); color: var(--link); display: grid; place-items: center; }
+.action .ico .icon { width: 24px; height: 24px; }
+.action a.main { font-family: var(--f-display); font-weight: 800; font-size: 1.2rem; color: var(--ink); text-decoration: none; line-height: 1.15; }
+.action a.main::after { content: " →"; color: var(--muted); }
+.action .val { font-size: .9rem; color: var(--muted); font-weight: 500; overflow-wrap: anywhere; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.copy { font: 600 .78rem var(--f-body); color: var(--link); background: var(--blue-soft); border: 0; border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+.hours {
+  margin-top: 16px; border-radius: 20px; padding: 20px; color: var(--yellow);
+  background: radial-gradient(120% 140% at 0% 0%, #2A6DB2, #1D5594);
+}
+.hours h3 { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 800; margin-bottom: 12px; }
+.hours ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.hours li { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.08); font-weight: 700; font-size: 1.08rem; }
+.hours li .t { font-variant-numeric: tabular-nums; color: #FFFFFF; }
+.hours li.today { background: var(--yellow); color: #12233A; }
+.hours li.today .t { color: #12233A; }
+.hours .more { margin-top: 12px; font-style: italic; font-weight: 500; color: #FFFFFF; opacity: .9; }
+
+/* Pied de page */
+footer { border-top: 1px solid var(--line); padding-block: 28px; color: var(--muted); font-size: .88rem; }
+footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.foot-id { display: flex; align-items: center; gap: 12px; }
+.foot-id img { width: 48px; height: 48px; border-radius: 50%; background: var(--disc); padding: 3px; border: 2px solid var(--yellow); }
+.foot-id .credit { display: block; margin-top: 4px; font-size: .8rem; opacity: .85; }
+.foot-id .credit a { color: inherit; font-weight: 600; text-underline-offset: 2px; }
+.foot-id strong { color: var(--ink); font-family: var(--f-display); font-size: 1.05rem; display: block; line-height: 1.2; }
+.qr { display: none; }
+@media (min-width: 820px) {
+  .qr { display: flex; align-items: center; gap: 14px; }
+  .qr svg, .qr img { width: 112px; height: 112px; background: #FFFFFF; padding: 6px; border-radius: 10px; border: 1px solid var(--line); }
+  .qr p { max-width: 12ch; font-family: var(--f-display); font-weight: 800; color: var(--ink); font-size: 1.05rem; line-height: 1.15; text-transform: uppercase; letter-spacing: .02em; }
+}
+
+@media (min-width: 820px) {
+  .hero { padding-block: 44px 80px; }
+  .disc { width: 184px; height: 184px; }
+  .event { grid-template-columns: 100px minmax(0, 1fr); padding: 20px; }
+  .events { grid-template-columns: 1fr 1fr; }
+}
+</style>
+<style>body{margin:0}img{max-width:100%;height:auto}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-join" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M19 8v6M16 11h6"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.4"/></symbol>
+  <symbol id="i-follow" viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3.5h3.5l1.8 4.6-2.4 1.5a11 11 0 0 0 6.5 6.5l1.5-2.4 4.6 1.8V19a2 2 0 0 1-2 2A16.5 16.5 0 0 1 3 5.5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.6-4.2A8.5 8.5 0 1 1 20.5 11.5z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></symbol>
+</svg>
+
+<nav class="tabbar" aria-label="Rubriques">
+  <div class="tabbar-inner">
+    <a class="brand" href="#accueil"><img src="logo-ppc.webp" alt="" width="40" height="40">PPC</a>
+    <ul>
+      <li><a href="#adhesion"><span class="pip"><svg class="icon"><use href="#i-join"/></svg></span>Adhésion</a></li>
+      <li><a href="#manifestations"><span class="pip"><svg class="icon"><use href="#i-cal"/></svg></span>Manifestations</a></li>
+      <li><a href="#suivez-nous"><span class="pip"><svg class="icon"><use href="#i-follow"/></svg></span>Suivez-nous</a></li>
+      <li><a href="#contact"><span class="pip"><svg class="icon"><use href="#i-phone"/></svg></span>Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="accueil">
+  <div class="wrap">
+    <div class="disc">
+      <picture>
+        <source srcset="logo-ppc.webp" type="image/webp">
+        <img src="logo-ppc.png" alt="Logo du Parachute Pétanque Club" width="480" height="480" fetchpriority="high">
+      </picture>
+    </div>
+    <h1>LE PARACHUTE PÉTANQUE CLUB</h1>
+    <p class="place">PETIT-BOURG • GUADELOUPE</p>
+    <p class="values">Convivialité<span>•</span>Sport<span>•</span>Partage</p>
+    <a class="btn btn-yellow" href="#adhesion"><svg class="icon"><use href="#i-join"/></svg>Je veux rejoindre le PPC</a>
+  </div>
+</header>
+
+<div class="wrap next" id="next">
+  <a href="#manifestations">
+    <span class="badge"><svg class="icon"><use href="#i-cal"/></svg></span>
+    <span class="next-text">
+      <span class="label">Prochain rendez-vous</span>
+      <span class="title" id="next-title">PPC FAIT SON OCTOBRE ROSE</span>
+      <span class="when" id="next-when">Concours féminin – 25 octobre 2026</span>
+    </span>
+    <svg class="icon go"><use href="#i-arrow"/></svg>
+  </a>
+</div>
+
+<main class="wrap">
+
+  <section id="adhesion" aria-labelledby="h-adhesion">
+    <div class="sec-head">
+      <span class="badge"><svg class="icon"><use href="#i-join"/></svg></span>
+      <div>
+        <p class="eyebrow" id="adh-eyebrow">ADHÉSION 2026/2027</p>
+        <h2 id="h-adhesion">Rejoignez le Parachute Pétanque Club</h2>
+      </div>
+    </div>
+    <div class="lede">
+      <strong>Envie de rejoindre notre club ?</strong>
+      <em>Découvrez nos formules d’adhésion et téléchargez le formulaire d’inscription</em>
+    </div>
+    <div class="prices" id="prices">
+      <div class="price"><span class="cat">SENIORS</span><span class="amount">120€</span><span class="per">par an</span></div>
+      <div class="price"><span class="cat">JEUNES</span><span class="amount">80€</span><span class="per">par an</span></div>
+      <div class="price"><span class="cat">LOISIRS</span><span class="amount">30€</span><span class="per">par an</span></div>
+    </div>
+    <div class="download">
+      <a class="btn btn-blue" id="dl" href="documents/formulaire-adhesion-ppc-2026-2027.pdf" target="_blank" rel="noopener">
+        <svg class="icon"><use href="#i-down"/></svg>Télécharger le formulaire d’adhésion
+      </a>
+      <span class="meta">PDF · 3 pages</span>
+      <span class="dl-msg" id="dl-msg" role="status" hidden></span>
+      <span class="season" id="season">Saison 2026-2027</span>
+    </div>
+  </section>
+
+  <section id="manifestations" aria-labelledby="h-manif">
+    <div class="sec-head">
+      <span class="badge"><svg class="icon"><use href="#i-cal"/></svg></span>
+      <div>
+        <p class="eyebrow">NOS MANIFESTATIONS</p>
+        <h2 id="h-manif">Les prochains rendez-vous du Parachute Pétanque Club</h2>
+      </div>
+    </div>
+    <div class="events" id="events">
+      <article class="event rose" data-start="2026-10-25" data-end="2026-10-25" data-title="PPC FAIT SON OCTOBRE ROSE" data-when="Concours féminin – 25 octobre 2026">
+        <div class="date" aria-hidden="true"><span class="d">25</span><span class="m">OCT</span><span class="y">2026</span></div>
+        <div class="event-body">
+          <h3>PPC FAIT SON OCTOBRE ROSE</h3>
+          <p class="sub">Concours féminin – 25 octobre 2026</p>
+          <p class="detail">Au profit de la Ligue contre le cancer de Guadeloupe</p>
+        </div>
+      </article>
+      <article class="event" data-start="2027-02-06" data-end="2027-02-07" data-title="MÉMORIAL PARACHUTE" data-when="6 et 7 février 2027">
+        <div class="date" aria-hidden="true"><span class="d">6-7</span><span class="m">FÉV</span><span class="y">2027</span></div>
+        <div class="event-body">
+          <h3>MÉMORIAL PARACHUTE</h3>
+          <p class="sub">6 et 7 février 2027</p>
+          <p class="detail">Compétition régionale</p>
+        </div>
+      </article>
+    </div>
+    <div class="note">
+      <h3>NOS CONCOURS &amp; ÉVÉNEMENTS</h3>
+      <p>Retrouvez régulièrement nos prochains rendez-vous.</p>
+    </div>
+  </section>
+
+  <section id="suivez-nous" aria-labelledby="h-follow">
+    <div class="sec-head">
+      <span class="badge"><svg class="icon"><use href="#i-follow"/></svg></span>
+      <h2 id="h-follow">SUIVEZ-NOUS</h2>
+    </div>
+    <div class="socials">
+      <a class="social" href="https://www.facebook.com/people/Parachute-PC-Soudiagom/pfbid02rv2i1UgfqttcuXDgRPmEsFwEBLSd34H61T6hTKEpUzgvhq1p98i3hSqqEzVLxiw9l/" target="_blank" rel="noopener">
+        <span class="txt"><span class="net">Facebook</span><span class="handle">Parachute PC Soudiagom</span></span>
+        <svg class="icon go"><use href="#i-out"/></svg>
+      </a>
+      <a class="social" href="https://www.instagram.com/parachutepetanqueclub/" target="_blank" rel="noopener">
+        <span class="txt"><span class="net">Instagram</span><span class="handle">@parachutepetanqueclub</span></span>
+        <svg class="icon go"><use href="#i-out"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="h-contact">
+    <div class="sec-head">
+      <span class="badge"><svg class="icon"><use href="#i-phone"/></svg></span>
+      <h2 id="h-contact">CONTACT &amp; INFOS PRATIQUES</h2>
+    </div>
+    <div class="actions">
+      <div class="action">
+        <span class="ico"><svg class="icon"><use href="#i-chat"/></svg></span>
+        <a class="main" href="https://wa.me/33633194275" target="_blank" rel="noopener">WhatsApp</a>
+        <span class="val">+33 6 33 19 42 75</span>
+      </div>
+      <div class="action">
+        <span class="ico"><svg class="icon"><use href="#i-mail"/></svg></span>
+        <a class="main" href="mailto:parachutepetanqueclub@gmail.com">Email</a>
+        <span class="val"><span id="mail">parachutepetanqueclub<wbr>@gmail.com</span><button class="copy" type="button" id="copy-mail">Copier</button></span>
+      </div>
+      <div class="action">
+        <span class="ico"><svg class="icon"><use href="#i-pin"/></svg></span>
+        <a class="main" href="https://www.google.com/maps/search/?api=1&amp;query=Parc+Tr%C3%A9ber+Saint-Jean+97170+Petit-Bourg+Guadeloupe" target="_blank" rel="noopener">Adresse du terrain</a>
+        <span class="val">Parc Tréber, Saint-Jean, 97170 Petit-Bourg</span>
+      </div>
+    </div>
+    <div class="hours">
+      <h3><svg class="icon"><use href="#i-clock"/></svg>HORAIRES DES ENTRAÎNEMENTS</h3>
+      <ul id="hours-list">
+        <li data-day="2"><span>Mardi</span><span class="t">18h00 – 20h00</span></li>
+        <li data-day="4"><span>Jeudi</span><span class="t">18h00 – 20h00</span></li>
+      </ul>
+      <p class="more" id="hours-note">D’autres créneaux pourront être ajoutés prochainement.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-id">
+      <img src="logo-ppc.webp" alt="" width="48" height="48" loading="lazy">
+      <div><strong>Parachute Pétanque Club</strong>Petit-Bourg • Guadeloupe · <span id="foot-season">Saison 2026-2027</span><span class="credit">Site réalisé par <a href="https://kreoldigital.fr" target="_blank" rel="noopener">Kreol’Digital</a></span></div>
+    </div>
+    <div class="qr"><svg viewBox="0 0 33 33" role="img" aria-label="QR code vers ce site" shape-rendering="crispEdges"><path fill="#12233A" d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM10 0h1v1h-1zM13 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM23 0h1v1h-1zM26 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM29 0h1v1h-1zM30 0h1v1h-1zM31 0h1v1h-1zM32 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h1v1h-1zM11 1h1v1h-1zM13 1h1v1h-1zM14 1h1v1h-1zM15 1h1v1h-1zM17 1h1v1h-1zM20 1h1v1h-1zM21 1h1v1h-1zM22 1h1v1h-1zM26 1h1v1h-1zM32 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM8 2h1v1h-1zM9 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM23 2h1v1h-1zM26 2h1v1h-1zM28 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM32 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM11 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM16 3h1v1h-1zM20 3h1v1h-1zM22 3h1v1h-1zM23 3h1v1h-1zM24 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM29 3h1v1h-1zM30 3h1v1h-1zM32 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM15 4h1v1h-1zM18 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM23 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM32 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM15 5h1v1h-1zM16 5h1v1h-1zM17 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM21 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM29 6h1v1h-1zM30 6h1v1h-1zM31 6h1v1h-1zM32 6h1v1h-1zM8 7h1v1h-1zM9 7h1v1h-1zM10 7h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM15 7h1v1h-1zM18 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM24 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM11 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM27 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM0 9h1v1h-1zM1 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM16 9h1v1h-1zM18 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM26 9h1v1h-1zM27 9h1v1h-1zM29 9h1v1h-1zM30 9h1v1h-1zM31 9h1v1h-1zM32 9h1v1h-1zM0 10h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM15 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM21 10h1v1h-1zM22 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM31 10h1v1h-1zM0 11h1v1h-1zM1 11h1v1h-1zM3 11h1v1h-1zM5 11h1v1h-1zM7 11h1v1h-1zM8 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM21 11h1v1h-1zM22 11h1v1h-1zM23 11h1v1h-1zM24 11h1v1h-1zM25 11h1v1h-1zM28 11h1v1h-1zM29 11h1v1h-1zM30 11h1v1h-1zM31 11h1v1h-1zM0 12h1v1h-1zM1 12h1v1h-1zM3 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM10 12h1v1h-1zM15 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM22 12h1v1h-1zM24 12h1v1h-1zM25 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM31 12h1v1h-1zM0 13h1v1h-1zM2 13h1v1h-1zM5 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM17 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM23 13h1v1h-1zM26 13h1v1h-1zM29 13h1v1h-1zM30 13h1v1h-1zM31 13h1v1h-1zM32 13h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM11 14h1v1h-1zM12 14h1v1h-1zM13 14h1v1h-1zM17 14h1v1h-1zM19 14h1v1h-1zM21 14h1v1h-1zM22 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM0 15h1v1h-1zM1 15h1v1h-1zM2 15h1v1h-1zM7 15h1v1h-1zM8 15h1v1h-1zM11 15h1v1h-1zM13 15h1v1h-1zM16 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM26 15h1v1h-1zM29 15h1v1h-1zM30 15h1v1h-1zM0 16h1v1h-1zM4 16h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM13 16h1v1h-1zM17 16h1v1h-1zM19 16h1v1h-1zM24 16h1v1h-1zM25 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM32 16h1v1h-1zM1 17h1v1h-1zM2 17h1v1h-1zM7 17h1v1h-1zM9 17h1v1h-1zM16 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM29 17h1v1h-1zM30 17h1v1h-1zM31 17h1v1h-1zM32 17h1v1h-1zM1 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM12 18h1v1h-1zM14 18h1v1h-1zM15 18h1v1h-1zM17 18h1v1h-1zM24 18h1v1h-1zM25 18h1v1h-1zM26 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM30 18h1v1h-1zM31 18h1v1h-1zM0 19h1v1h-1zM2 19h1v1h-1zM3 19h1v1h-1zM4 19h1v1h-1zM8 19h1v1h-1zM9 19h1v1h-1zM12 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM20 19h1v1h-1zM21 19h1v1h-1zM23 19h1v1h-1zM26 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM29 19h1v1h-1zM30 19h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM9 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM20 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM25 20h1v1h-1zM28 20h1v1h-1zM29 20h1v1h-1zM32 20h1v1h-1zM0 21h1v1h-1zM2 21h1v1h-1zM4 21h1v1h-1zM10 21h1v1h-1zM11 21h1v1h-1zM12 21h1v1h-1zM15 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM23 21h1v1h-1zM25 21h1v1h-1zM26 21h1v1h-1zM29 21h1v1h-1zM30 21h1v1h-1zM32 21h1v1h-1zM0 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM11 22h1v1h-1zM12 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM16 22h1v1h-1zM18 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM29 22h1v1h-1zM30 22h1v1h-1zM31 22h1v1h-1zM0 23h1v1h-1zM2 23h1v1h-1zM4 23h1v1h-1zM5 23h1v1h-1zM10 23h1v1h-1zM12 23h1v1h-1zM15 23h1v1h-1zM21 23h1v1h-1zM29 23h1v1h-1zM30 23h1v1h-1zM0 24h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM9 24h1v1h-1zM14 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM29 24h1v1h-1zM8 25h1v1h-1zM10 25h1v1h-1zM11 25h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM16 25h1v1h-1zM18 25h1v1h-1zM19 25h1v1h-1zM20 25h1v1h-1zM24 25h1v1h-1zM28 25h1v1h-1zM30 25h1v1h-1zM32 25h1v1h-1zM0 26h1v1h-1zM1 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM9 26h1v1h-1zM11 26h1v1h-1zM13 26h1v1h-1zM15 26h1v1h-1zM16 26h1v1h-1zM18 26h1v1h-1zM20 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM30 26h1v1h-1zM31 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM9 27h1v1h-1zM12 27h1v1h-1zM16 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM29 27h1v1h-1zM30 27h1v1h-1zM31 27h1v1h-1zM32 27h1v1h-1zM0 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM9 28h1v1h-1zM10 28h1v1h-1zM11 28h1v1h-1zM14 28h1v1h-1zM18 28h1v1h-1zM19 28h1v1h-1zM21 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM29 28h1v1h-1zM0 29h1v1h-1zM2 29h1v1h-1zM3 29h1v1h-1zM4 29h1v1h-1zM6 29h1v1h-1zM8 29h1v1h-1zM9 29h1v1h-1zM10 29h1v1h-1zM12 29h1v1h-1zM15 29h1v1h-1zM16 29h1v1h-1zM17 29h1v1h-1zM20 29h1v1h-1zM21 29h1v1h-1zM23 29h1v1h-1zM25 29h1v1h-1zM28 29h1v1h-1zM30 29h1v1h-1zM31 29h1v1h-1zM32 29h1v1h-1zM0 30h1v1h-1zM2 30h1v1h-1zM3 30h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM8 30h1v1h-1zM9 30h1v1h-1zM11 30h1v1h-1zM14 30h1v1h-1zM17 30h1v1h-1zM19 30h1v1h-1zM22 30h1v1h-1zM23 30h1v1h-1zM24 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM30 30h1v1h-1zM0 31h1v1h-1zM6 31h1v1h-1zM9 31h1v1h-1zM10 31h1v1h-1zM11 31h1v1h-1zM14 31h1v1h-1zM16 31h1v1h-1zM19 31h1v1h-1zM20 31h1v1h-1zM21 31h1v1h-1zM22 31h1v1h-1zM23 31h1v1h-1zM28 31h1v1h-1zM29 31h1v1h-1zM30 31h1v1h-1zM0 32h1v1h-1zM1 32h1v1h-1zM2 32h1v1h-1zM3 32h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM8 32h1v1h-1zM12 32h1v1h-1zM13 32h1v1h-1zM17 32h1v1h-1zM18 32h1v1h-1zM19 32h1v1h-1zM22 32h1v1h-1zM23 32h1v1h-1zM24 32h1v1h-1zM25 32h1v1h-1zM27 32h1v1h-1zM31 32h1v1h-1z"/></svg><p>Scannez pour découvrir le PPC</p></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ---------- Contenu modifiable (Pages CMS) ----------
+  // Les fichiers data/*.json sont édités depuis Pages CMS. Le contenu déjà
+  // présent dans la page sert de secours si un fichier ne se charge pas.
+  var now = new Date();
+  var MOIS = ['JAN','FÉV','MARS','AVR','MAI','JUIN','JUIL','AOÛT','SEPT','OCT','NOV','DÉC'];
+  var JOURS = { dimanche: 0, lundi: 1, mardi: 2, mercredi: 3, jeudi: 4, vendredi: 5, samedi: 6 };
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function parseDate(v) { var p = String(v || '').slice(0, 10).split('-'); if (p.length < 3 || !+p[0]) return null; return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function cleanPath(v) { return encodeURI(String(v || '').trim().replace(/^\/+/, '')); }
+  function load(path) { return fetch(path, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(path); return r.json(); }); }
+
+  function renderEvents(list) {
+    if (!Array.isArray(list)) return;
+    var box = document.getElementById('events');
+    box.textContent = '';
+    list.filter(function (m) { return m && m.titre && parseDate(m.debut); })
+      .sort(function (a, b) { return parseDate(a.debut) - parseDate(b.debut); })
+      .forEach(function (m) {
+        var d1 = parseDate(m.debut), d2 = parseDate(m.fin) || d1;
+        if (d2 < d1) d2 = d1;
+        var art = el('article', 'event' + (m.couleur === 'rose' ? ' rose' : ''));
+        art.dataset.start = m.debut; art.dataset.end = (m.fin || m.debut);
+        art.dataset.title = m.titre; art.dataset.when = m.ligne1 || '';
+        var date = el('div', 'date'); date.setAttribute('aria-hidden', 'true');
+        var sameDay = d1.getTime() === d2.getTime(), sameMonth = d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear();
+        var dTxt = sameDay || !sameMonth ? String(d1.getDate()) : d1.getDate() + '-' + d2.getDate();
+        date.appendChild(el('span', 'd' + (dTxt.length > 3 ? ' long' : ''), dTxt));
+        date.appendChild(el('span', 'm', MOIS[d1.getMonth()]));
+        date.appendChild(el('span', 'y', d1.getFullYear()));
+        if (!sameMonth) date.appendChild(el('span', 'to', 'au ' + d2.getDate() + ' ' + MOIS[d2.getMonth()]));
+        var body = el('div', 'event-body');
+        body.appendChild(el('h3', null, m.titre));
+        if (m.ligne1) body.appendChild(el('p', 'sub', m.ligne1));
+        if (m.ligne2) body.appendChild(el('p', 'detail', m.ligne2));
+        art.appendChild(date); art.appendChild(body); box.appendChild(art);
+      });
+  }
+
+  function markEvents() {
+    // Grise les dates passées et met à jour « Prochain rendez-vous ».
+    var next = null, box = document.getElementById('events');
+    Array.prototype.slice.call(box.querySelectorAll('.event')).forEach(function (ev) {
+      var end = parseDate(ev.dataset.end || ev.dataset.start);
+      if (end) end.setHours(23, 59, 59);
+      if (end && end < now) {
+        ev.classList.add('is-past');
+        ev.querySelector('.event-body').prepend(el('span', 'chip', 'Terminé'));
+        box.appendChild(ev);
+      } else if (!next) { next = ev; }
+    });
+    var teaser = document.getElementById('next');
+    if (next) {
+      document.getElementById('next-title').textContent = next.dataset.title;
+      document.getElementById('next-when').textContent = next.dataset.when;
+      teaser.hidden = false;
+    } else { teaser.hidden = true; }
+  }
+
+  function renderAdhesion(a) {
+    if (!a) return;
+    if (a.saison) {
+      var s = String(a.saison).trim();
+      document.getElementById('adh-eyebrow').textContent = 'ADHÉSION ' + s.replace(/\s*-\s*/, '/');
+      document.getElementById('season').textContent = 'Saison ' + s;
+      document.getElementById('foot-season').textContent = 'Saison ' + s;
+    }
+    if (Array.isArray(a.tarifs) && a.tarifs.length) {
+      var box = document.getElementById('prices');
+      box.textContent = '';
+      a.tarifs.forEach(function (t) {
+        if (!t || !t.categorie) return;
+        var d = el('div', 'price');
+        d.appendChild(el('span', 'cat', t.categorie));
+        d.appendChild(el('span', 'amount', (t.prix != null && t.prix !== '' ? t.prix : '–') + '€'));
+        d.appendChild(el('span', 'per', 'par an'));
+        box.appendChild(d);
+      });
+      box.style.gridTemplateColumns = 'repeat(' + Math.min(box.children.length, 3) + ', minmax(0, 1fr))';
+    }
+    if (a.formulaire) document.getElementById('dl').setAttribute('href', cleanPath(a.formulaire));
+  }
+
+  function renderHoraires(h) {
+    if (!h) return;
+    if (Array.isArray(h.creneaux)) {
+      var ul = document.getElementById('hours-list');
+      ul.textContent = '';
+      h.creneaux.forEach(function (c) {
+        if (!c || !c.jour) return;
+        var li = el('li');
+        var n = JOURS[String(c.jour).trim().toLowerCase()];
+        if (n != null) li.dataset.day = n;
+        li.appendChild(el('span', null, c.jour));
+        li.appendChild(el('span', 't', c.heures || ''));
+        ul.appendChild(li);
+      });
+    }
+    var note = document.getElementById('hours-note');
+    note.textContent = h.note || '';
+    note.hidden = !h.note;
+  }
+
+  function markToday() {
+    var today = now.getDay();
+    document.querySelectorAll('#hours-list li').forEach(function (li) {
+      li.classList.toggle('today', li.dataset.day !== undefined && +li.dataset.day === today);
+    });
+  }
+
+  Promise.all([
+    load('data/manifestations.json').then(renderEvents, function () {}),
+    load('data/adhesion.json').then(renderAdhesion, function () {}),
+    load('data/horaires.json').then(renderHoraires, function () {})
+  ]).then(function () { markEvents(); markToday(); }, function () { markEvents(); markToday(); });
+
+  // Copier l'adresse email.
+  var btn = document.getElementById('copy-mail');
+  btn.addEventListener('click', function () {
+    var txt = document.getElementById('mail');
+    var done = function () { btn.textContent = 'Copié'; setTimeout(function () { btn.textContent = 'Copier'; }, 1800); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(txt); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(txt.textContent).then(done, fallback); } catch (e) { fallback(); }
+  });
+
+  // Onglet actif selon la rubrique visible.
+  var links = {};
+  document.querySelectorAll('.tabbar ul a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        Object.keys(links).forEach(function (k) { links[k].removeAttribute('aria-current'); });
+        if (links[e.target.id]) links[e.target.id].setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { io.observe(s); });
+  }
+
+  // Formulaire : sur un hébergement classique le lien suffit ; dans Claude,
+  // on passe par l'enregistrement de fichier proposé par la page.
+  var dl = document.getElementById('dl'), msg = document.getElementById('dl-msg');
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('downloads').then(function (downloads) {
+      if (!downloads) return;
+      dl.addEventListener('click', function (e) {
+        e.preventDefault();
+        fetch(dl.getAttribute('href')).then(function (r) { return r.blob(); }).then(function (blob) {
+          var name = decodeURI(dl.getAttribute('href').split('/').pop()) || 'formulaire-adhesion-ppc.pdf';
+          return downloads.save({ filename: name, data: blob });
+        }).then(function () { msg.hidden = true; }, function (err) {
+          if (err && err.code === 'declined') return;
+          msg.textContent = 'Le téléchargement n’a pas pu démarrer. Réessayez dans un instant.';
+          msg.hidden = false;
+        });
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

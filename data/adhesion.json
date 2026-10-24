@@ -1,0 +1,9 @@
+{
+  "saison": "2026-2027",
+  "tarifs": [
+    { "categorie": "SENIORS", "prix": 120 },
+    { "categorie": "JEUNES", "prix": 80 },
+    { "categorie": "LOISIRS", "prix": 30 }
+  ],
+  "formulaire": "documents/formulaire-adhesion-ppc-2026-2027.pdf"
+}
